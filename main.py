@@ -436,13 +436,13 @@ def sign_in():
 
 def get_browser():
     logger.info('Configuring browser')
-    chrome_options = wd.ChromeOptions()
-    if args.headless:
-        chrome_options.add_argument('--headless')
-    chrome_options.add_argument('log-level=3')
-    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    chrome_options.add_argument("--headless")
-    browser = wd.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
+    options = wd.ChromeOptions()
+    # if args.headless:
+    #     chrome_options.add_argument('--headless')
+    options.add_argument('log-level=3')
+    options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    options.add_argument("--headless")
+    browser = wd.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=options)
     return browser
 
 

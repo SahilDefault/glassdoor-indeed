@@ -437,11 +437,15 @@ def sign_in():
 def get_browser():
     logger.info('Configuring browser')
     options = wd.ChromeOptions()
-    # if args.headless:
-    #     chrome_options.add_argument('--headless')
-    options.add_argument('log-level=3')
     options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    options.add_argument("--window-size=1920,1080")
+    options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    options.add_experimental_option('useAutomationExtension', False)
     options.add_argument("--headless")
+    # options.add_argument(f'user-agent={user_agent}')
+    options.add_argument('--disable-dev-shm-usage')
+    options.add_argument("--no-sandbox")
+
     browser = wd.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=options)
     return browser
 

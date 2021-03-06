@@ -436,18 +436,27 @@ def sign_in():
 
 def get_browser():
     logger.info('Configuring browser')
-    options = wd.ChromeOptions()
-    options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    options.add_argument("--window-size=1920,1080")
-    options.add_experimental_option("excludeSwitches", ["enable-automation"])
-    options.add_experimental_option('useAutomationExtension', False)
-    options.add_argument("--headless")
-    # options.add_argument(f'user-agent={user_agent}')
-    options.add_argument('--disable-dev-shm-usage')
-    options.add_argument("--no-sandbox")
-
-    browser = wd.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=options)
+    chrome_options = wd.ChromeOptions()
+    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('log-level=3')
+    browser = wd.Chrome(options=chrome_options, executable_path=os.environ.get("CHROMEDRIVER_PATH"))
     return browser
+
+# def get_browser():
+#     logger.info('Configuring browser')
+#     options = wd.ChromeOptions()
+#     options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+#     options.add_argument("--window-size=1920,1080")
+#     options.add_experimental_option("excludeSwitches", ["enable-automation"])
+#     options.add_experimental_option('useAutomationExtension', False)
+#     options.add_argument("--headless")
+#     # options.add_argument(f'user-agent={user_agent}')
+#     options.add_argument('--disable-dev-shm-usage')
+#     options.add_argument("--no-sandbox")
+#
+#     browser = wd.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=options)
+#     return browser
 
 
 def get_current_page():
